@@ -70,6 +70,7 @@ DATABASES = {
         
     }
 }
+
 ######Comment this for development enviroment############
 #Parse database configuration from $DATABASE_URL
 import dj_database_url

@@ -40,20 +40,20 @@
 			});
 		</script>
 		<script>
-			function validateForm(){
-				if($('#name').val() == '' || $('#school').val() == '' || $('#phone').val() == '' || $('#email').val() == '' || $('#country').val() == ''){
+			function validateForm1(){
+				if($('#name1').val() == '' || $('#school1').val() == '' || $('#phone1').val() == '' || $('#email1').val() == '' || $('#country1').val() == ''){
 					swal({
-						title: 'Error',
-						text: 'Todos los campos son requeridos.',
+						title: 'Something went wrong',
+						text: 'All fields are required.',
 						type: "warning",
 					});
 					return false;
 				}
-				var name1 = $('#name').val();
-				var school = $('#school').val();
-				var phone = $('#phone').val();
-				var email = $('#email').val();
-				var country = $('#country').val();
+				var name1 = $('#name1').val();
+				var school1 = $('#school1').val();
+				var phone1 = $('#phone1').val();
+				var email1 = $('#email1').val();
+				var country1 = $('#country1').val();
 				var csrftoken = getCookie('csrftoken');
 				$.ajaxSetup({
 					beforeSend: function(xhr, settings) {
@@ -69,11 +69,50 @@
 					url: "/sendemail/",
 					async: false,
 					type: "POST",
-					data:{'name':name1,'school':school,'phone':phone,'email':email,'country':country,}
+					data:{'name':name1,'school':school1,'phone':phone1,'email':email1,'country':country1,}
 				}).done(function() {
 				  swal({
-						title: 'Éxito',
-						text: 'Hemos recibido tu solicitud. Pronto nos comunicaremos contigo.',
+						title: 'Success',
+						text: 'We have processed your request. We will get in contact with you soon.',
+						type: "success",
+					});					
+				});
+				return false;
+			}
+			function validateForm2(){
+				if($('#name2').val() == '' || $('#school2').val() == '' || $('#phone2').val() == '' || $('#email2').val() == '' || $('#country2').val() == ''){
+					swal({
+						title: 'Something went wrong',
+						text: 'All fields are required.',
+						type: "warning",
+					});
+					return false;
+				}
+				var name2 = $('#name2').val();
+				var school2 = $('#school2').val();
+				var phone2 = $('#phone2').val();
+				var email2 = $('#email2').val();
+				var country2 = $('#country2').val();
+				var csrftoken = getCookie('csrftoken');
+				$.ajaxSetup({
+					beforeSend: function(xhr, settings) {
+						if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+							// Send the token to same-origin, relative URLs only.
+							// Send the token only if the method warrants CSRF protection
+							// Using the CSRFToken value acquired earlier
+							xhr.setRequestHeader("X-CSRFToken", csrftoken);
+						}
+					}
+				});
+				$.ajax({
+					url: "/sendemail/",
+					async: false,
+					type: "POST",
+					data:{'name':name2,'school':school2,'phone':phone2,'email':email2,'country':country2,}
+				}).done(function() {
+				  swal({
+						title: 'Success',
+						text: 'We have processed your request. We will get in contact with you soon.',
 						type: "success",
 					});					
 				});
@@ -113,75 +152,133 @@
 			}
 
 		</script>
-    </head>
+	</head>
 
     <body>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="{{STATIC_URL}}dist/http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="logo"></div>
-      <div class="container">
-        <h1>Educación en emprendimiento redefinida</h1>
-        <h2>Exchange, el salón de clases basado en proyectos</h2>
-        <div class="cta-container" id="prueba">
-          <div class="fix-form">
-            <h3>Dános tus datos y pronto te contactaremos.</h3>
-            <form method="post" action="/" id="contact" onsubmit="return validateForm(this)">
+    <div class="fix-form small-hidden">
+		<a><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+            <h3>Give us your contact details and we will contact you shortly.</h3>
+            <form method="post" action="/" id="contact2" onsubmit="return validateForm2()">
 				{% csrf_token %}
-              <input type="text" name="name" placeholder="Nombre" id="name">
-              <input type="text" name="school" placeholder="Universidad/Colegio" id="school">
-              <input type="text" name="email" placeholder="Correo electrónico" id="email">
-              <input type="text" name="country" placeholder="Pais" id="country">
-              <input type="text" name="phone" placeholder="Teféfono" class="numericField" id="phone">
+              <input type="text" name="name2" placeholder="Nombre" id="name2">
+              <input type="text" name="school2" placeholder="Universidad/Colegio" id="school2">
+              <input type="text" name="email2" placeholder="Correo electrónico" id="email2">
+              <input type="text" name="country2" placeholder="Pais" id="country2">
+              <input type="text" name="phone2" placeholder="Número tefefónico" class="numericField" id="phone2">
 				  <script>
-						$("#contact").validate({
+						$("#contact2").validate({
 								rules:{
-									name:{
+									name2:{
 										required:true,
 									},
-									school:{
+									school2:{
 										required:true,																
 									},
-									email:{
+									email2:{
 										required:true,																
 									},
-									country:{
+									country2:{
 										required:true,																
 									},
-									phone:{
+									phone2:{
 										required:true,																
 									},								
 								},
 								messages:{
-									name:{
+									name2:{
 										required:'',
 									},
-									school:{
+									school2:{
 										required:'',																
 									},
-									email:{
+									email2:{
 										required:'',																
 									},
-									country:{
+									country2:{
 										required:'',																
 									},
-									phone:{
+									phone2:{
 										required:'',																
 									},
 								},
 								errorClass: "bgError",
 								errorPlacement: function(error, element) {      
-									$('#signin').find(".hidden_error_label").html(error);
+									$(".hidden_error_label2").html(error);
 								},								
 							});
 					</script>
-              <button class="btn btn-primary btn-lg" role="button">Enviar</button>
-			  <span class="hidden_error_label hidden"></span>
+              <button class="btn btn-primary btn-lg" role="button">Submit</button>
+			  <span class="hidden_error_label2 hidden"></span>
             </form>
           </div>
-          <a class="btn btn-primary btn-lg" href="javascript:void(0)" role="button">Mas información</a>
+          
+    <div class="jumbotron">
+      <div class="logo"></div>
+      <div class="container">
+        <h1>Entrepreneurship education reinvented</h1>
+        <h2>Exchange, a project based classroom</h2>
+        <div class="cta-container" id="prueba">
+          <div class="fix-form">
+			  <a><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+            <h3>Give us your contact details and we will contact you shortly.</h3>
+            <form method="post" action="/" id="contact1" onsubmit="return validateForm1()">
+				{% csrf_token %}
+              <input type="text" name="name1" placeholder="Nombre" id="name1">
+              <input type="text" name="school1" placeholder="Universidad/colegio" id="school1">
+              <input type="text" name="email1" placeholder="Correo electrónico" id="email1">
+              <input type="text" name="country1" placeholder="Pais" id="country1">
+              <input type="text" name="phone1" placeholder="Número tefefónico" class="numericField" id="phone1">
+				  <script>
+						$("#contact1").validate({
+								rules:{
+									name1:{
+										required:true,
+									},
+									school1:{
+										required:true,																
+									},
+									email1:{
+										required:true,																
+									},
+									country1:{
+										required:true,																
+									},
+									phone1:{
+										required:true,																
+									},								
+								},
+								messages:{
+									name1:{
+										required:'',
+									},
+									school1:{
+										required:'',																
+									},
+									email1:{
+										required:'',																
+									},
+									country1:{
+										required:'',																
+									},
+									phone1:{
+										required:'',																
+									},
+								},
+								errorClass: "bgError",
+								errorPlacement: function(error, element) {      
+									$(".hidden_error_label1").html(error);
+								},								
+							});
+					</script>
+              <button class="btn btn-primary btn-lg" role="button">Submit</button>
+			  <span class="hidden_error_label1 hidden"></span>
+            </form>
+          </div>
+          <a class="btn btn-primary btn-lg form-activate" href="javascript:void(0)" role="button">I want to learn more</a>
         </div>
       </div>
     </div>

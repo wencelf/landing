@@ -71,12 +71,12 @@
 					type: "POST",
 					data:{'name':name1,'school':school1,'phone':phone1,'email':email1,'country':country1,}
 				}).done(function() {
+					$('.fix-form').removeClass("fixed-form");					
 				  swal({
 						title: 'Success',
 						text: 'We have processed your request. We will get in contact with you soon.',
 						type: "success",
-					});					
-				});
+				});				
 				return false;
 			}
 			function validateForm2(){
@@ -110,10 +110,11 @@
 					type: "POST",
 					data:{'name':name2,'school':school2,'phone':phone2,'email':email2,'country':country2,}
 				}).done(function() {
+					$('.small-form').removeClass("small-form");						
 				  swal({
 						title: 'Success',
 						text: 'We have processed your request. We will get in contact with you soon.',
-						type: "success",
+						type: "success",					
 					});					
 				});
 				return false;
